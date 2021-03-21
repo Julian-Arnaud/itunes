@@ -1,22 +1,22 @@
-import logo from './logo.svg';
+import {itunesApiRequest} from './Result';
+import Songs from './Songs';
 import './App.css';
+import React, {useState} from 'react';
 
 function App() {
+  const [resu, setResu] = useState("");
+  const [requ, setRequ] = useState("");
+  async function doTheSearch() {
+		const response = await itunesApiRequest(requ);
+    setResu(response);//les 50 elements de results
+	};
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <input id="rs" type="text" value={requ} onChange={(e) => setRequ(e.target.value)}/>
+        <input type="button" id="go" value="Rechercher" onClick={() => doTheSearch()}/>
+        {resu != "" && <Songs inpt={resu}></Songs>}
+        
       </header>
     </div>
   );
