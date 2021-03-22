@@ -1,5 +1,7 @@
 import {itunesApiRequest} from './Result';
-import Songs from './Songs';
+import Songs from './components/Songs';
+import {TextField, IconButton} from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
 import './App.css';
 import React, {useState} from 'react';
 
@@ -13,10 +15,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <input id="rs" type="text" value={requ} onChange={(e) => setRequ(e.target.value)}/>
-        <input type="button" id="go" value="Rechercher" onClick={() => doTheSearch()}/>
+        <TextField id="rs" type="text" value={requ} onChange={(e) => setRequ(e.target.value)}/>
+        <IconButton onClick={() => doTheSearch()}>
+          <SearchIcon/>
+        </IconButton>
         {resu != "" && <Songs inpt={resu}></Songs>}
-        
       </header>
     </div>
   );
